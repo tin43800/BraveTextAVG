@@ -50,6 +50,7 @@ namespace BraveTextAVG
 
             //ACCOUNT
             GAME_ACCOUNT,
+            NPC_MEET,
             PLAYER_LEVELUP                 //player level up.
         }
         public State state = State.WAITING;
@@ -79,6 +80,7 @@ namespace BraveTextAVG
             stateDic.Add(State.MONSTER_HURT, Monster_Hurt);
             stateDic.Add(State.MONSTER_DIE, Monster_Die);
             stateDic.Add(State.GAME_ACCOUNT, Game_Account);
+            stateDic.Add(State.NPC_MEET, Npc_Meet);
         }
         public void changeState(State state){
             this.state = state;
@@ -225,7 +227,7 @@ namespace BraveTextAVG
         {
             Console.WriteLine("PLAYER Level UP!....\n");
             brave.LevelUp();
-            changeState(State.WAITING);
+            changeState(State.NPC_MEET);
         }
         private void Player_Info()
         {
@@ -277,6 +279,14 @@ namespace BraveTextAVG
             else
                 changeState(State.WAITING);
             monster.reset();
+        }
+        private void Npc_Meet() 
+        {
+            Console.WriteLine("------------------------------------\n");
+            Console.WriteLine("WEAPON STORE.\nMONEY:{0}\n",brave.Money);
+            NPC weaponSolder = new NPC();
+            Console.WriteLine("------------------------------------\n");
+            changeState(State.WAITING);
         }
         public State getState()
         {
